@@ -1,0 +1,31 @@
+const num1= Math.ceil(Math.random()*10);
+const num2= Math.ceil(Math.random()*10);
+
+const questionEl = document.getElementById("question");
+const inputEl = document.getElementById("input");
+const formEl= document.getElementById("form");
+const scoreEl= document.getElementById("score");
+let score= JSON.parse(localStorage.getItem("score"));
+questionEl.innerText = `What is ${num1} x ${num2}?`;
+if(!score){
+    score=0;
+}
+const correctAns= num1*num2;
+scoreEl.innerText = `score: ${score}`;
+
+formEl.addEventListener("submit",()=>{
+    const userAns = +inputEl.value;
+   if(userAns === correctAns)
+   {
+    score++
+    Update()
+   }
+   else{
+    score--
+    Update()
+   }
+});
+
+function Update(){
+    localStorage.setItem("score", JSON.stringify(score))
+}
